@@ -60,7 +60,7 @@ ansible-playbook site.yml --skip-tags=dashboard
 
 # Interact with Kubernetes
 
-## From you control station
+## From your control station
 
 * Copy the /etc/kubernetes/admin.conf file from the master node to your control station as $HOME/.kube/config
     * (or name it different but then export the KUBECONFIG environment variable to point to this file)
