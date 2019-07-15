@@ -22,9 +22,9 @@
 ## Software
 
 * [Raspbian Buster Lite](https://www.raspberrypi.org/downloads/raspbian/) (installed on each Raspberry Pi)
-* Raspberry Pis should have static IPs
+* Raspberry Pi's should have static IP addresses
     * Requirement for Kubernetes and Ansible inventory
-    * The Ansible common role will set it in the dhcpcd.conf file
+    * The Ansible common role will set it in the **dhcpcd.conf** file
 * Ability to SSH into all Raspberry Pis and escalate privileges with sudo
     * The pi user is fine just change its password
     * Use __'ssh-copy-id'__ on your control station to copy your SSH public key to the nodes
