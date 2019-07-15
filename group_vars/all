@@ -1,4 +1,4 @@
-token: udy29x.ugyyk3tumg27atmr
+token: abc12d.hiek3mvug13amto
 podnet: 10.244.0.0/16
 
 kubernetes_package_version: "1.15.0-00"
