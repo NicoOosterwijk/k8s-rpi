@@ -34,7 +34,7 @@
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
     * If you are administering the cluster from your control station, `kubectl` 
 
-## Download the latest release or clone the repo:
+## Clone the repository:
 
 ```
 git clone https://git.digitalinfo.nl/nico/k8srpi.git
@@ -55,7 +55,7 @@ This may fail to ping if you have not setup SSH keys and only configured your Pi
 ## Deployment
 
 ```
-ansible-playbook site.yml
+ansible-playbook site.yml --skip-tags=dashboard
 ```
 
 # Interact with Kubernetes
@@ -82,7 +82,13 @@ node2      Ready     <none>    18h       v1.15.0
 
 ## Dashboard
 
-You can also install the non-HTTPS version of the Kubernetes dashboard. This is not recommended for production clusters but, it simplifies the setup. Access the dashboard by running:
+You can also install the non-HTTPS version of the Kubernetes dashboard. This is not recommended for production clusters but, it simplifies the setup. 
+
+```
+ansible-playbook site.yml --tags=dashboard
+```
+
+Access the dashboard by running:
 
 ```
 kubectl proxy
