@@ -2,7 +2,7 @@
 
 ## Why?
 
-* Raspberry Pis are cheap
+* Raspberry Pi's are cheap
 * Ansible is awesome
 * Kubernetes is hot
 * It's fun!
@@ -11,7 +11,7 @@
 
 ## Hardware
 
-* Raspberry Pi 3 (3 or more)
+* Raspberry Pi 3 B+ (3 or more)
 * USB powerport (like Anker) to supply power to the RPI's
 * Class 10 SD Cards (16G or 32G)
 * Gigabit Network Switch (5 ports or more)
@@ -37,7 +37,7 @@
 ## Clone the repository:
 
 ```
-git clone https://git.digitalinfo.nl/nico/k8srpi.git
+git clone http://git.digitalinfo.nl/nico/k8s-rpi.git
 ```
 
 ## Modify ansible.cfg and inventory
