@@ -1,0 +1,84 @@
+---
+- name: Ensure hostname set
+  hostname:
+    name: "{{ inventory_hostname }}"
+  when: not inventory_hostname is match('(\d{1,3}\.){3}\d{1,3}')
+  register: hostname
+  tags: hostname
+
+- name: Ensure hostname is in /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^{{ ansible_default_ipv4.address }}.+$"
+    line: "{{ ansible_default_ipv4.address }}   {{ ansible_hostname }}"
+  register: hostname
+  tags: hostname
+
+- name: set timezone to UTC
+  timezone:
+    name: Europe/Amsterdam
+  register: timezone
+
+- name: Test for cgroup entry
+  command: 'grep "rootwait cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memor" /boot/cmdline.txt'
+  register: test_grep1
+  ignore_errors: yes
+  tags: cgroup
+
+- name: cmdline add cgroup params
+  lineinfile:
+    path: /boot/cmdline.txt
+    backrefs: True
+    state: present
+    regexp: '(.*)$'
+    line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memor'
+  when: test_grep1.stdout == "" 
+  register: cgroup
+  tags: cgroup
+
+- name: Disable wifi adapter
+  lineinfile:
+    path: /boot/config.txt
+    insertafter: '^#dtoverlay=lirc-rpi'
+    line: 'dtoverlay=pi3-disable-wifi'
+  tags: wifi
+
+- name: set rights on remote tmp directory
+  file:
+    path: /root/.ansible/tmp
+    state: directory
+    mode: 0755
+  tags: staticip
+
+- name: configure static IP
+  blockinfile:
+    path: /etc/dhcpcd.conf
+    block: |
+       # static IP configuration:
+       interface eth0
+       static ip_address={{ ansible_default_ipv4.address }}/24
+       static routers=192.168.178.1
+       static domain_name_servers=192.168.178.1 8.8.8.8
+  tags: staticip
+
+- name: apt-get update
+  apt:
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+    cache_valid_time: 86400
+
+- name: apt-get upgrade
+  apt:
+    upgrade: full
+
+- name: python-apt dependency
+  shell: apt-get install -y python-apt
+  args:
+    warn: no
+
+- name: Reboot
+  reboot:
+  #when: cmdline or timezone or hostname is changed
+  when: timezone or cgroup or hostname is changed
+

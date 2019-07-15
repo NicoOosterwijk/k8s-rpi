@@ -1,0 +1,17 @@
+- hosts: all
+  roles:
+    - { role: common, tags: 'common' }
+    - { role: k8s, tags: 'k8s' }
+
+- hosts: masters
+  roles:
+    - { role: masters, tags: 'masters' }   
+
+- hosts: workers
+  roles:
+    - { role: workers, tags: 'workers' }  
+
+#- hosts: masters
+#  roles:
+#    - { role: ddashboard, tags: 'dashboard' }  
+

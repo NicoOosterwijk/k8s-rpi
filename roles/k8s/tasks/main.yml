@@ -1,0 +1,64 @@
+---
+# tasks file for kubernetes
+
+- name: Disable Swap
+  shell: dphys-swapfile swapoff && dphys-swapfile uninstall && update-rc.d dphys-swapfile remove
+  ignore_errors: True
+
+- name: Determine if docker is installed
+  stat:
+    path: /usr/bin/docker
+  register: docker_there
+  ignore_errors: True
+
+- name: Add Docker Repo key
+  shell: curl -fsSL https://download.docker.com/linux/raspbian/gpg | sudo apt-key add -
+  args:
+    warn: no
+
+- name: Add Docker to Available apt sources
+  template:
+    src: docker.list
+    dest: /etc/apt/sources.list.d/docker.list
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: latest
+
+- name: Add Google Cloud Repo Key
+  shell: curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+  args:
+    warn: no
+
+- name: Add Kubernetes to Available apt Sources
+  template:
+    src: kubernetes.list
+    dest: /etc/apt/sources.list.d/kubernetes.list
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Update apt-cache
+  apt:
+    update_cache: yes
+
+- name: Install docker-ce
+  apt:
+    name: docker-ce
+    state: present
+    force: yes
+    install_recommends: no
+  when: docker_there.stat.exists == False and not ansible_check_mode
+  register: docker_installed
+
+- name: Install k8s {{ kubernetes_package_version }} 
+  apt:
+    name: ['kubelet', 'kubeadm', 'kubectl']
+    state: present
+    force: yes
+  when: not ansible_check_mode
+  tags: kubeinstall

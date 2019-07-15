@@ -1,0 +1,45 @@
+---
+# tasks file for master
+- name: Reset Kubernetes Master
+  shell: kubeadm reset -f
+  register: kubeadm_reset
+
+- name: "Initialize Master {{ kubernetes_version }}"
+  shell: kubeadm init --apiserver-advertise-address={{ ansible_default_ipv4.address }} --token={{ token }} --kubernetes-version={{ kubernetes_version }} --pod-network-cidr={{ podnet }}
+  register: kubeadm_init
+  when: kubeadm_reset is succeeded
+
+- name: Create Kubernetes config directory
+  file:
+    path: /root/.kube/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Copy admin.conf to config directory
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /root/.kube/config
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: yes
+    backup: yes
+  when: kubeadm_init
+
+#- name: Join Kubernetes Cluster
+#  shell: kubeadm join --ignore-preflight-errors=all --token {{ token }} {{ groups['master'][0] }}:6443 --discovery-token-unsafe-skip-ca-verification
+#  when: kubeadm_reset is succeeded
+#  register: kubeadm_join
+
+- name: Install Flannel (Networking)
+  shell: "curl -sSL https://rawgit.com/coreos/flannel/{{ flannel_version }}/Documentation/kube-flannel.yml | kubectl create -f -" 
+
+- name: Restart kubelet
+  systemd:
+    name: kubelet
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  register: kubelet_restart
