@@ -1,5 +1,5 @@
 token: abc12d.hiek3mvug13amto
-podnet: 10.244.0.0/16
+pod-network: 10.244.0.0/16
 
 kubernetes_package_version: "1.15.0-00"
 kubernetes_version: "v1.15.0"

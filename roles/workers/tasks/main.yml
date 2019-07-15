@@ -1,18 +1,23 @@
 ---
-# tasks file for minions
-#- name: Reset Kubernetes
-#  shell: kubeadm reset -f
-#  register: kubeadm_reset
+# tasks file for workers
 
-- name: Join Kubernetes Cluster
-  shell: kubeadm join --ignore-preflight-errors=all --token {{ token }} {{ groups['master'][0] }}:6443 --discovery-token-unsafe-skip-ca-verification
-  #when: kubeadm_reset is succeeded
-  register: kubeadm_join
+- name: Copy joincommand to nodes
+  copy: 
+    src: "joincommand.sh" 
+    dest: "/tmp/joincommand.sh"
+    mode: '0755'
+      
+- name: execute join command
+  shell: /tmp/joincommand.sh
+  register: joinresults
 
-- name: Restart kubelet
-  systemd:
-    name: kubelet
-    state: restarted
-    daemon_reload: yes
-    enabled: yes
-  register: kubelet_restarted
+- name: Show Join results
+  debug: var=joinresults.stdout
+
+#- name: Restart kubelet
+#  systemd:
+#    name: kubelet
+#    state: restarted
+#    daemon_reload: yes
+#    enabled: yes
+#  register: kubelet_restarted
