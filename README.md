@@ -15,7 +15,7 @@
 * USB powerport (like Anker) to supply power to the RPI's
 * Class 10 SD Cards (16G or 32G)
 * Gigabit Network Switch (5 ports or more)
-* Ethernet cables for your RPI's (plus one for the core port)
+* Ethernet cables for your RPI's (1 for every RPi plus 1 for the core port)
 * Wired Network connections with access to the internet
 * Stackable RPi case
 
