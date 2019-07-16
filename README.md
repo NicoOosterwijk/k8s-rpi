@@ -37,7 +37,7 @@
 ## Clone the repository:
 
 ```
-git clone http://git.digitalinfo.nl/nico/k8s-rpi.git
+git clone http://gogs.digitalinfo.local/digitalinfo/k8s-rpi.git
 ```
 
 ## Modify ansible.cfg and inventory
