@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx2
+  name: nginx2
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: nginx2
+  template:
+    metadata:
+      labels:
+        app: nginx2
+    spec:
+      containers:
+      - image: nginx:1
+        name: nginx2
+        ports:
+        - containerPort: 88
+          name: http
+          protocol: TCP
+        resources: {}
+        volumeMounts:
+        - name: custom-http
+          mountPath: /usr/share/nginx/html/
+      volumes:
+        - name: custom-http
+          configMap:
+            name: custom-html
