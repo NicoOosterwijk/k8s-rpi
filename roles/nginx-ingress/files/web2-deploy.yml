@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: web2
+  name: web2
+  namespace: canary
+spec:
+  selector:
+    matchLabels:
+      run: web2
+  template:
+    metadata:
+      labels:
+        run: web2
+    spec:
+      containers:
+      - image: gcr.io/google-samples/hello-app:2.0
+        name: web2
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  index.html: |
+    <html>
+    <head>
+      <title>Welcome to NGINX2/title>
+    </head>
+
+    <body>
+    <center>
+    <h2>Welcome to our new NGINX server on!</h2>
+    You are on the nginx2 server!
+    </center>
+    </body>
+
+    </html>
+kind: ConfigMap
+metadata:
+  name: custom-html
+  namespace: default
