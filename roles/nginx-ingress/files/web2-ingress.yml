@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+   name: canary-ingress
+   namespace: canary
+   annotations:
+     nginx.ingress.kubernetes.io/canary: "true"
+     nginx.ingress.kubernetes.io/canary-weight: "20"
+     nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: hello-world.info
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: web2
+          servicePort: 8080 
