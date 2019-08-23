@@ -4,11 +4,11 @@ metadata:
   labels:
     run: web
   name: web
-  namespace: default
+  namespace: production
 spec:
   ports:
   - port: 8080
-    protocol: TCP
+#    protocol: TCP
     targetPort: 8080
   selector:
     run: web

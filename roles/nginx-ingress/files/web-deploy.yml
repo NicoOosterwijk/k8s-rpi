@@ -4,8 +4,9 @@ metadata:
   labels:
     run: web
   name: web
-  namespace: default
+  namespace: production
 spec:
+  replicas: 3
   selector:
     matchLabels:
       run: web
@@ -15,7 +16,13 @@ spec:
         run: web
     spec:
       containers:
-      - image: gcr.io/google-samples/hello-app:1.0
-        name: web
+      - name: web
+        image: docker.io/nokkie/app:1.0
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        command: ["/app"]
         ports:
         - containerPort: 8080

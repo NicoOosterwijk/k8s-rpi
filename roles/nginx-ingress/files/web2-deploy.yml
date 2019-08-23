@@ -15,7 +15,13 @@ spec:
         run: web2
     spec:
       containers:
-      - image: gcr.io/google-samples/hello-app:2.0
-        name: web2
+      - name: web
+        image: docker.io/nokkie/app:2.0
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        command: ["/app"]
         ports:
         - containerPort: 8080
