@@ -22,7 +22,11 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: 8080
+            port: liveness-port
         command: ["/app"]
         ports:
-        - containerPort: 8080
+        - name: liveness-port
+          containerPort: 8080
+      nodeSelector:
+        name: node1
+

@@ -18,10 +18,12 @@ spec:
       - image: nginx:1
         name: nginx2
         ports:
-        - containerPort: 88
+        - containerPort: 80
           name: http
           protocol: TCP
-        resources: {}
+        readinessProbe:
+          tcpSocket:
+            port: 80
         volumeMounts:
         - name: custom-http
           mountPath: /usr/share/nginx/html/

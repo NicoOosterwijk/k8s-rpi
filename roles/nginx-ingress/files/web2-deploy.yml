@@ -21,7 +21,9 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: 8080
+            port: readyness-port
         command: ["/app"]
         ports:
-        - containerPort: 8080
+        - name: readyness-port
+          containerPort: 8080
+
