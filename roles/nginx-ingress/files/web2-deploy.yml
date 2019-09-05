@@ -22,6 +22,11 @@ spec:
           httpGet:
             path: /health
             port: readyness-port
+        livenessProbe:
+          tcpSocket:
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 20
         command: ["/app"]
         ports:
         - name: readyness-port

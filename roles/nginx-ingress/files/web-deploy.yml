@@ -22,10 +22,15 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: liveness-port
+            port: http
+        livenessProbe:
+          tcpSocket:
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 20
         command: ["/app"]
         ports:
-        - name: liveness-port
+        - name: http
           containerPort: 8080
       nodeSelector:
         name: node1
