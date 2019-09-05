@@ -18,7 +18,7 @@ spec:
       - name: web
         image: docker.io/nokkie/app:2.0
         imagePullPolicy: Always
-        livenessProbe:
+        readynessProbe:
           httpGet:
             path: /health
             port: http
