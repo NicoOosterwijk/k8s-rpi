@@ -31,7 +31,7 @@
     backrefs: True
     state: present
     regexp: '(.*)$'
-    line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memor'
+    line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
   when: test_grep1.stdout == "" 
   register: cgroup
   tags: cgroup
@@ -50,16 +50,16 @@
     mode: 0755
   tags: staticip
 
-- name: configure static IP
-  blockinfile:
-    path: /etc/dhcpcd.conf
-    block: |
-       # static IP configuration:
-       interface eth0
-       static ip_address={{ ansible_default_ipv4.address }}/24
-       static routers=192.168.178.1
-       static domain_name_servers=192.168.178.1 8.8.8.8
-  tags: staticip
+#- name: configure static IP
+#  blockinfile:
+#    path: /etc/dhcpcd.conf
+#    block: |
+#       # static IP configuration:
+#       interface eth0
+#       static ip_address={{ ansible_default_ipv4.address }}/24
+#       static routers=192.168.178.1
+#       static domain_name_servers=192.168.178.1 8.8.8.8
+#  tags: staticip
 
 - name: apt-get update
   apt:
