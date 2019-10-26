@@ -13,5 +13,5 @@
 
 - hosts: masters
   roles:
-    - { role: ddashboard, tags: 'dashboard' }  
+    - { role: dashboard, tags: 'dashboard' }  
 
