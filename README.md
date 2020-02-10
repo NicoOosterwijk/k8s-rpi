@@ -29,7 +29,7 @@
 * Allow Hypriot to rename the hostname
     * The Ansible common role will set the **user_data** file to allow this
 * Ability to SSH into all Raspberry Pis and escalate privileges with sudo
-    * The pi user is fine just change its password
+    * The **pirate** user is fine just change its password
     * Use __'ssh-copy-id'__ on your control station to copy your SSH public key to the nodes
 * [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.7 or higher
     * To be able to run the playbooks
