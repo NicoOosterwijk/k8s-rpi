@@ -11,7 +11,4 @@
   roles:
     - { role: workers, tags: 'workers' }  
 
-- hosts: masters
-  roles:
-    - { role: dashboard, tags: 'dashboard' }  
 
