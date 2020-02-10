@@ -46,6 +46,10 @@ Modify the **inventory** file to suit your environment. Change the names to your
 
 If your SSH user on the Raspberry Pi's are not the Raspbian default `pi` user modify `remote_user` in the `ansible.cfg`.
 
+## Modify the versions in the group_vars all file
+
+Modify the **all** file to suit the versions being used for the software packages
+
 ## Confirm Ansible is working with your Raspberry Pi's:
 
 ```
