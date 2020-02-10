@@ -3,7 +3,7 @@
   replace:
     dest: /boot/user_data
     regexp: "^hostname: black-pearl"
-    line: "hostname: {{ ansible_hostname }}"
+    replace: "hostname: {{ ansible_hostname }}"
   register: hostname
   tags: hostname,user_data
 
