@@ -4,3 +4,7 @@ kubernetes_package_version: "1.15.0-00"
 kubernetes_version: "v1.15.0"
 docker_ce_version: "18.06.2~ce~3-0~raspbian"
 flannel_version: "master"
+
+router_ip: 192.168.1.254
+dns_ip1: 192.168.1.254
+dns_ip2: 8.8.8.8

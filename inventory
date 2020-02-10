@@ -1,6 +1,6 @@
-[workers]
-node1
-node2
-
 [masters]
-master
+master   ansible_host=192.168.1.10
+
+[workers]
+node1    ansible_host=192.168.1.11
+node2    ansible_host=192.168.1.12

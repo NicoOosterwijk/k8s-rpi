@@ -21,11 +21,13 @@
 
 ## Software
 
-* [Raspbian Buster Lite](https://www.raspberrypi.org/downloads/raspbian/) (installed on each Raspberry Pi)
+* [Raspbian Hypriot](https://blog.hypriot.com/downloads/) (install this on each Raspberry Pi)
 
 * Raspberry Pi's should have static IP addresses
     * Requirement for Kubernetes and Ansible inventory
     * The Ansible common role will set it in the **dhcpcd.conf** file
+* Allow Hypriot to rename the hostname
+    * The Ansible common role will set the **user_data** file to allow this
 * Ability to SSH into all Raspberry Pis and escalate privileges with sudo
     * The pi user is fine just change its password
     * Use __'ssh-copy-id'__ on your control station to copy your SSH public key to the nodes
