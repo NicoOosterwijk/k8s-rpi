@@ -1,7 +1,7 @@
 ---
 - name: Ensure hostname is in /boot/user_data
   replace:
-    dest: /boot/user_data
+    dest: /boot/user-data
     regexp: "^hostname: black-pearl"
     replace: "hostname: {{ ansible_hostname }}"
   register: hostname
@@ -9,7 +9,7 @@
 
 - name: Set the nl locale
   lineinfile:
-    path: /boot/user_data
+    path: /boot/user-data
     regexp: '^# locale'
     insertafter: '^# locale '
     line: 'locale: "nl_NL.UTF-8"'
@@ -17,7 +17,7 @@
 
 - name: Set the timezone
   lineinfile:
-    path: /boot/user_data
+    path: /boot/user-data
     regexp: '^# timezone'
     insertafter: '^# timezone '
     line: 'timezone: "Europe/Amsterdam"'
