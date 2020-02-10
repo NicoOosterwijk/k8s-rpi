@@ -12,7 +12,7 @@
 ## Hardware
 
 * Raspberry Pi 3 B+ (3 or more)
-* USB powerport (like Anker) to supply power to the RPI's
+* USB powerport (like Xtorm) to supply power to the RPI's
 * Class 10 SD Cards (16G or 32G)
 * Gigabit Network Switch (5 ports or more)
 * Ethernet cables for your RPI's (1 for every RPi plus 1 for the core port)
