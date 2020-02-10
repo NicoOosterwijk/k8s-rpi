@@ -18,6 +18,7 @@
 * Ethernet cables for your RPI's (1 for every RPi plus 1 for the core port)
 * Wired Network connections with access to the internet
 * Stackable RPi case
+* Control Station (Mac, Linux or Windows computer)
 
 ## Software
 
