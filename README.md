@@ -31,8 +31,10 @@
 * Ability to SSH into all Raspberry Pis and escalate privileges with sudo
     * The **pirate** user is fine just change its password
     * Use __'ssh-copy-id'__ on your control station to copy your SSH public key to the nodes
+
 * [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.7 or higher
     * To be able to run the playbooks
+
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
     * If you are administering the cluster from your control station, `kubectl` 
 
