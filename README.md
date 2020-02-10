@@ -59,7 +59,7 @@ This may fail to ping if you have not setup SSH keys and only configured your Pi
 ## Deployment
 
 ```
-ansible-playbook site.yml --skip-tags=dashboard
+ansible-playbook site.yml
 ```
 
 # Interact with Kubernetes
@@ -84,19 +84,4 @@ node1      Ready     <none>    18h       v1.15.0
 node2      Ready     <none>    18h       v1.15.0
 ```
 
-## Dashboard
 
-You can also install the non-HTTPS version of the Kubernetes dashboard. This is not recommended for production clusters but, it simplifies the setup. 
-
-```
-ansible-playbook site.yml --tags=dashboard
-```
-
-Access the dashboard by running:
-
-```
-kubectl proxy
-```
-
-Then open a web browser and navigate to:
-[http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
