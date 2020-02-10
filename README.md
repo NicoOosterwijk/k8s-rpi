@@ -1,5 +1,7 @@
 # Create a Raspberry Pi based Kubernetes cluster with Ansible
 
+## (Change to the Hypriot branch for Hypriot installations)
+
 ## Why?
 
 * Raspberry Pi's are cheap
