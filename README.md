@@ -20,27 +20,23 @@
 * Ethernet cables for your RPI's (1 for every RPi plus 1 for the core port)
 * Wired Network connections with access to the internet
 * Stackable RPi case
+* Control Station (Mac, Linux or Windows computer)
 
 ## Software
 
 * [Raspbian Buster Lite](https://www.raspberrypi.org/downloads/raspbian/) (installed on each Raspberry Pi)
-
 * Raspberry Pi's should have static IP addresses
-    * Requirement for Kubernetes and Ansible inventory
-    * The Ansible common role will set it in the **dhcpcd.conf** file
+  * Requirement for Kubernetes and Ansible inventory
+  * The Ansible common role will set it in the **dhcpcd.conf** file
 * Ability to SSH into all Raspberry Pis and escalate privileges with sudo
-    * The pi user is fine just change its password
-    * Use __'ssh-copy-id'__ on your control station to copy your SSH public key to the nodes
-* [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.7 or higher
-    * To be able to run the playbooks
-* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
-    * If you are administering the cluster from your control station, `kubectl` 
+  * The pi user is fine just change its password
+  * Use __'ssh-copy-id'__ on your Control Station to copy your SSH public key to the nodes
+* [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.7 or higher on your Control Station
+  * To be able to run the playbooks
+* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) on your Control Station
+  * If you are administering the cluster from your control station, `kubectl` 
 
-## Clone the repository:
-
-```
-git clone http://git.digitalinfo.nl/nico/k8s-rpi.git
-```
+## Clone this repository: use the button on this repo
 
 ## Modify ansible.cfg and inventory
 
