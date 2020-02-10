@@ -5,7 +5,7 @@
     regexp: "^hostname: black-pearl"
     replace: "hostname: {{ ansible_hostname }}"
   register: hostname
-  tags: hostname,user_data
+  tags: hostname,userdata
 
 - name: Set the nl locale
   lineinfile:
@@ -13,7 +13,7 @@
     regexp: '^# locale'
     insertafter: '^# locale '
     line: 'locale: "nl_NL.UTF-8"'
-  tags: locale,user_data
+  tags: locale,userdata
 
 - name: Set the timezone
   lineinfile:
@@ -21,12 +21,7 @@
     regexp: '^# timezone'
     insertafter: '^# timezone '
     line: 'timezone: "Europe/Amsterdam"'
-  tags: locale,user_data  
-
-#- name: set timezone to UTC
-#  timezone:
-#    name: Europe/Amsterdam
-#  register: timezone
+  tags: timezone,userdata  
 
 - name: Disable wifi adapter
   lineinfile:
