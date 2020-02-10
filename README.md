@@ -30,17 +30,13 @@
   * The Ansible common role will set the **user_data** file to allow this
 * Ability to SSH into all Raspberry Pis and escalate privileges with sudo
   * The **pirate** user is fine just change its password
-  * Use __'ssh-copy-id'__ on your control station to copy your SSH public key to the nodes
-* [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.7 or higher
+  * Use __'ssh-copy-id'__ on your Control Station to copy your SSH public key to the nodes
+* [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) 2.7 or higher on your Control Station
   * To be able to run the playbooks
-* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 
+* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) on your Control Station
   * If you are administering the cluster from your control station, `kubectl` 
 
-## Clone the repository:
-
-```
-git clone http://git.digitalinfo.nl/nico/k8s-rpi.git
-```
+## Clone this repository: use the Clone button
 
 ## Modify ansible.cfg and inventory
 
