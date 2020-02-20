@@ -18,7 +18,7 @@
   apt:
     update_cache: yes
 
-- name: Install k8s {{ kubernetes_package_version }} 
+- name: Install k8s
   apt:
     name: ['kubelet', 'kubeadm', 'kubectl']
     state: present

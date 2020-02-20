@@ -21,6 +21,7 @@
     regexp: '^# timezone'
     insertafter: '^# timezone '
     line: 'timezone: "Europe/Amsterdam"'
+  register: timezone
   tags: timezone,userdata  
 
 - name: Disable wifi adapter
@@ -54,18 +55,19 @@
     autoclean: yes
     autoremove: yes
     cache_valid_time: 86400
+  tags: update
 
 - name: apt-get upgrade
   apt:
     upgrade: full
+  tags: upgrade
 
-- name: python-apt dependency
-  shell: apt-get install -y python-apt
-  args:
-    warn: no
+#- name: python-apt dependency
+#  shell: apt-get install -y python-apt
+#  args:
+#    warn: no
 
 - name: Reboot
   reboot:
-  #when: cmdline or timezone or hostname is changed
-  when: timezone or cgroup or hostname is changed
+  when: timezone or hostname is changed
 

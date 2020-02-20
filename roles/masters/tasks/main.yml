@@ -11,9 +11,10 @@
 - name: get token
   debug: var=token.stdout
 
-- name: Initialize Master {{ kubernetes_version }}
+- name: Initialize Master
   shell: kubeadm init --apiserver-advertise-address={{ ansible_default_ipv4.address }} --token={{ token.stdout }} --pod-network-cidr={{ pod_network }} --token-ttl 0
   register: kubeadm_init
+  ignore_errors: yes
   when: kubeadm_reset is succeeded
 
 - name: Create Kubernetes config directory
@@ -45,7 +46,7 @@
     dest: "joincommand.sh"
     flat: yes
 
-- name: Install CNI network with Flannel
+- name: Install CNI network with Flannel (allow the pod some time to become ready)
   shell: "curl -sSL https://rawgit.com/coreos/flannel/{{ flannel_version }}/Documentation/kube-flannel.yml | kubectl create -f -" 
   tags: flannel
   
