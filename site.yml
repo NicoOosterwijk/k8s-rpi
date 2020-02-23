@@ -11,4 +11,6 @@
   roles:
     - { role: workers, tags: 'workers' }  
 
-
+#- hosts: all
+#  roles:
+#    - { role: cleanup, tags: 'cleanup' }

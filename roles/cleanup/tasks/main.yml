@@ -14,19 +14,15 @@
 
 - name: "apt-get purge packages"
   apt:
-    name: "{{ item }}"
+    name: ['kubelet', 'kubeadm', 'kubectl', 'docker-ce']
     state: absent
     purge: yes
     autoremove: yes
     force: yes
-  with_items:
-    - kubelet
-    - kubeadm
-    - kubectl
-    - docker-ce
 
 - name: "Remove pod logging"
-  shell: rm -rf /var/log/pods/* 
+  file: /var/log/pods/* 
+  state: absent
   become: True
 
 - name: Reboot
