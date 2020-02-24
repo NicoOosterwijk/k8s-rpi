@@ -14,7 +14,7 @@
 
 - name: "apt-get purge packages"
   apt:
-    name: ['kubelet', 'kubeadm', 'kubectl', 'docker-ce']
+    name: ['kubelet', 'kubeadm', 'kubectl']
     state: absent
     purge: yes
     autoremove: yes
@@ -27,4 +27,3 @@
 
 - name: Reboot
   reboot:
-
