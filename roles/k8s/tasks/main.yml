@@ -10,11 +10,13 @@
     path: /usr/bin/docker
   register: docker_there
   ignore_errors: True
+  tags: docker
 
 - name: Add Docker Repo key
   shell: curl -fsSL https://download.docker.com/linux/raspbian/gpg | sudo apt-key add -
   args:
     warn: no
+  tags: docker
 
 - name: Add Docker to Available apt sources
   template:
@@ -23,6 +25,7 @@
     owner: root
     group: root
     mode: 0644
+  tags: docker
 
 - name: Install apt-transport-https
   apt:
@@ -45,6 +48,7 @@
 - name: Update apt-cache
   apt:
     update_cache: yes
+  tags: daemon
 
 - name: Install docker-ce
   apt:
@@ -54,6 +58,7 @@
     install_recommends: no
   when: docker_there.stat.exists == False and not ansible_check_mode
   register: docker_installed
+  tags: docker
 
 - name: Install k8s {{ kubernetes_package_version }} 
   apt:
