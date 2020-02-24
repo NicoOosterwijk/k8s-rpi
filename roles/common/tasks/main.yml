@@ -70,4 +70,5 @@
 - name: Reboot
   reboot:
   when: timezone or hostname is changed
+  tags: reboot
 

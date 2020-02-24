@@ -8,6 +8,6 @@ dns_ip1: 192.168.1.254
 dns_ip2: 8.8.8.8
 
 cluster_name: k8s
-node01_name: {{ cluster_name }}-node-1
-node02_name: {{ cluster_name }}-node-2
-node03_name: {{ cluster_name }}-node-3
+node01_name: "{{ cluster_name }}-node-1"
+node02_name: "{{ cluster_name }}-node-2"
+node03_name: "{{ cluster_name }}-node-3"
