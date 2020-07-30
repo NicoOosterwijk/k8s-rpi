@@ -18,12 +18,13 @@
     state: absent
     purge: yes
     autoremove: yes
-    force: yes
 
 - name: "Remove pod logging"
-  file: /var/log/pods/* 
-  state: absent
+  file: 
+    path: /var/log/pods/* 
+    state: absent
   become: True
 
 - name: Reboot
   reboot:
+  tags: reboot

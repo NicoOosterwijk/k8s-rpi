@@ -3,8 +3,8 @@ pod_network: 10.244.0.0/16
 docker_ce_version: "18.06.2~ce~3-0~raspbian"
 flannel_version: "master"
 
-router_ip: 192.168.1.254
-dns_ip1: 192.168.1.254
+router_ip: 192.168.178.1
+dns_ip1: 192.168.178.1
 dns_ip2: 8.8.8.8
 
 cluster_name: k8s
