@@ -4,22 +4,6 @@
     - { role: k8s, tags: 'k8s' }
 
 - hosts: masters
-  
-  vars_prompt:
-    - name: cni_answer
-      prompt: "Do you want Flannel (f), Weave (w) or None (n)?"
-      default: "n"
-  
-  pre_tasks:
-    - debug:
-        msg: "Flannel it is!"
-      when: cni_answer == "f"
-      tags: masters
-    - debug:
-        msg: "Weave it is!"
-      when: cni_answer == "w"
-      tags: masters
-
   roles:
     - { role: masters, tags: 'masters' }   
 
