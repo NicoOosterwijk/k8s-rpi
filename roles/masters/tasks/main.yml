@@ -3,19 +3,23 @@
 - name: Reset Kubernetes Master
   shell: kubeadm reset -f
   register: kubeadm_reset
+  tags: master
 
 - name: Generate token
   shell: kubeadm token generate
   register: token
+  tags: master
 
 - name: get token
   debug: var=token.stdout
+  tags: master
 
 - name: Initialize Master
   shell: kubeadm init --apiserver-advertise-address={{ ansible_default_ipv4.address }} --token={{ token.stdout }} --pod-network-cidr={{ pod_network }} --token-ttl 0 --kubernetes-version=v1.8.1
   register: kubeadm_init
   ignore_errors: yes
   when: kubeadm_reset is succeeded and not ansible_check_mode
+  tags: master
 
 - name: Create Kubernetes config directory
   file:
@@ -24,6 +28,7 @@
     owner: root
     group: root
     mode: 0755
+  tags: master
 
 - name: Copy admin.conf to config directory
   copy:
@@ -35,24 +40,27 @@
     remote_src: yes
     backup: yes
   when: kubeadm_init
+  tags: master
 
 - name: get join command
   shell: 'kubeadm token create --print-join-command | tee "/tmp/joincommand"'
   register: joincommand
+  tags: master
 
 - name: Fetch joincommand from master
   fetch: 
     src: "/tmp/joincommand" 
     dest: "joincommand.sh"
     flat: yes
+  tags: master
 
 - name: Install CNI network with Flannel (allow the pod some time to become ready)
   shell: "curl -sSL https://rawgit.com/coreos/flannel/{{ flannel_version }}/Documentation/kube-flannel.yml | kubectl create -f -" 
-  tags: flannel
-  
-# - name: Install CNI network with Weave
+  tags: flannel,master
+
+  # - name: Install CNI network with Weave
 #   shell: "curl -sSL https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n') | kubectl create -f -" 
-#   tags: weave
+#   tags: weave,master
 
 - name: Restart kubelet
   systemd:
@@ -61,3 +69,4 @@
     daemon_reload: yes
     enabled: yes
   register: kubelet_restart
+  tags: master
