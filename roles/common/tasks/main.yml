@@ -57,10 +57,10 @@
     cache_valid_time: 86400
   tags: update
 
-- name: apt-get upgrade
-  apt:
-    upgrade: full
-  tags: upgrade
+# - name: apt-get upgrade
+#   apt:
+#     upgrade: full
+#   tags: upgrade
 
 #- name: python-apt dependency
 #  shell: apt-get install -y python-apt
